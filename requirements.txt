@@ -1,10 +1,15 @@
+blessed==1.20.0
+inquirer==3.1.3
 isodate==0.6.1
 numpy==1.25.0
 pandas==2.0.3
 pyparsing==3.1.0
 python-dateutil==2.8.2
+python-editor==1.0.4
 pytz==2023.3
 rdflib==6.3.2
+readchar==4.0.5
 six==1.16.0
 tqdm==4.65.0
 tzdata==2023.3
+wcwidth==0.2.6
