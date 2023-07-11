@@ -5,6 +5,7 @@ import pandas as pd
 import inquirer
 
 from RDF import rdf_exporter
+from redis_graph import RedisGraph
 
 print("CSV2Graph")
 
@@ -119,7 +120,8 @@ match graph_type:
     case "cypher":
         pass
     case "redisgraph":
-        pass
+        redisGraph = RedisGraph(graph_name, node_dfs, relation_dfs, csvs_dir_path, False)
+        redisGraph.write_bulk_csvs()
     case _:
         print(
             "Invalid graph type please input one of the following: rdf, d2rq, cypher, redisgraph"
