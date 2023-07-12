@@ -6,6 +6,7 @@ import inquirer
 
 from RDF import rdf_exporter
 from redis_graph import RedisGraph
+from d2rq import d2rq_exporter
 
 print("CSV2Graph")
 
@@ -83,7 +84,7 @@ if args.input:
             inquirer.List(
                 "graph_type",
                 message="What graph type would like to export to?",
-                choices=["rdf", "d2rq", "cypher", "redisgraph"],
+                choices=["rdf", "d2rq (MySQL)", "cypher", "redisgraph"],
             ),
         ]
     )["graph_type"]
@@ -116,11 +117,13 @@ match graph_type:
     case "rdf":
         rdf_exporter(graph_name, node_dfs, relation_dfs, csvs_dir_path)
     case "d2rq":
-        pass
+        d2rq_exporter(graph_name, node_dfs, relation_dfs, csvs_dir_path)
     case "cypher":
         pass
     case "redisgraph":
-        redisGraph = RedisGraph(graph_name, node_dfs, relation_dfs, csvs_dir_path, False)
+        redisGraph = RedisGraph(
+            graph_name, node_dfs, relation_dfs, csvs_dir_path, False
+        )
         redisGraph.write_bulk_csvs()
     case _:
         print(
